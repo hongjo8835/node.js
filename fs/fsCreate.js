@@ -1,12 +1,12 @@
 const fs = require('fs').promises;
 const constants = require('fs').constants;
 
-fs.access('./folder', constants.F_OK | constants.W_OK | constants.R_OK)
+fs.access('./folder', constants.F_OK | constants.W_OK | constants.R_OK) // fs.access(): 폴더나 파일에 접근할 수 있는지를 체크.
     .then(() => {
         return Promise.reject('폴더 있음');
     })
     .catch((err) => {
-        if (err.code === 'ENOENT') {
+        if (err.code === 'ENOENT') {    // 파일/폴더나 없을 때의 에러코드 ENOENT
             console.log('폴더 없음');
             return fs.mkdir('./folder');
         }
